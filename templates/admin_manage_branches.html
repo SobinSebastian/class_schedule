@@ -1,0 +1,186 @@
+{% include 'adminheader.html' %}
+ <section>
+      <div id="hero-section" class="landing-hero" data-stellar-background-ratio="0">
+        <div class="hero-content">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8 col-sm-offset-2">
+
+                <div class="hero-text">
+                  <div class="herolider">
+
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD3MPnSnyWwNmpnVEFkaddVvy_GWtxSejs&sensor=false"></script>
+    <script type="text/javascript">
+        // window.onload = function () {
+          function myFunction(){
+            var mapOptions = {
+                center: new google.maps.LatLng(9.9763482, 76.286272),
+                zoom: 14,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var infoWindow = new google.maps.InfoWindow();
+            var latlngbounds = new google.maps.LatLngBounds();
+            var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
+            google.maps.event.addListener(map, 'click', function (e) {
+                alert("Latitude: " + e.latLng.lat() + "\r\nLongitude: " + e.latLng.lng());
+              document.getElementById('lat').value = e.latLng.lat();
+                document.getElementById('lon').value = e.latLng.lng();
+           
+
+            });
+        }
+    </script>
+<style type="text/css">
+</style>
+
+<center>
+	<form method="post">
+		{% if data['updater'] %}
+		<h1>UPDATE BRANCH</h1>
+
+
+		
+	<table >
+	<tr>
+	<td>
+		<h1>MANAGE BRANCHES</h1>
+
+		<table class="table" style="width:  700px">
+		<tr>
+			<th>BRANCH NAME</th>
+			<td><input type="text" name="bname"  class="form-control" value="{{data['updater'][0]['branch_name']}}"></td>
+		</tr>
+		<tr>
+			<th>LATITUDE</th>
+			<td><input type="text" name="lat"  class="form-control" id="lat"  value="{{data['updater'][0]['latitude']}}" >
+			<a onclick="myFunction();" ><b>View Map</b></a></td>
+		</tr>
+		
+		<tr>
+			<th>LOGITUDE</th>
+			<td><input type="taext" name="lon"  class="form-control" id="lon" value="{{data['updater'][0]['longitude']}}"></td>
+		</tr>
+		<tr>
+			<th>PHONE</th>
+			<td><input type="text" name="phone"  class="form-control" value="{{data['updater'][0]['phone']}}"></td>
+		</tr>
+		<tr>
+			<th>EMAIL</th>
+			<td>
+			<input type="email" name="email"  class="form-control" value="{{data['updater'][0]['email']}}"></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center"><input type="submit" name="update" value="UPDATE" class="btn btn-primary"></td>
+		</tr>
+	</table>
+</td>
+<td>
+	 <div id="dvMap" style="width: 600px; height: 400px"></div>
+
+	</td>
+
+			</tr>
+		</table>
+
+
+
+		{% else %}
+
+	<table >
+	<tr>
+	<td>
+		<h1>MANAGE BRANCHES</h1>
+
+		<table class="table" style="width:  700px">
+		<tr>
+			<th>BRANCH NAME</th>
+			<td><input type="text" name="bname"  class="form-control"></td>
+		</tr>
+		<tr>
+			<th>LATITUDE</th>
+			<td><input type="text" name="lat"  class="form-control" id="lat">
+			<a onclick="myFunction();"><b>View Map</b></a></td>
+		</tr>
+		
+		<tr>
+			<th>LOGITUDE</th>
+			<td><input type="taext" name="lon"  class="form-control" id="lon"></td>
+		</tr>
+		<tr>
+			<th>PHONE</th>
+			<td><input type="text" name="phone"  class="form-control"></td>
+		</tr>
+		<tr>
+			<th>EMAIL</th>
+			<td>
+			<input type="email" name="email"  class="form-control"></td>
+		</tr>
+		
+
+		<tr>
+			<th>USER NAME</th>
+			<td><input type="text" name="uname"  minlength="5" placeholder="User Name Must Be Atleast 5 Charecter " class="form-control" ></td>
+		</tr>
+		<tr>
+			<th>PASSWORD</th>
+			<td><input type="password" name="password"  minlength="8" placeholder="Password Must Be Atleast 8 Charecter" class="form-control"></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center"><input type="submit" name="submit" value="register" class="btn btn-primary"></td>
+		</tr>
+	</table>
+</td>
+<td>
+	 <div id="dvMap" style="width: 600px; height: 400px"></div>
+
+	</td>
+
+			</tr>
+		</table>
+
+
+		{% if data['branch'] %}
+		<h1>BRANCHES ADDED IN OUR SYSTEM</h1>
+		<table class="table" width="600px">
+			<tr>
+				<th>BRANCH NAME</th>
+				<th>LATITUDE</th>
+				<th>LONGITUDE</th>
+				<th>PHONE</th>
+				<th>EMAIL</th>
+				<th>UPDATE</th>
+				<TH>DELETE</TH>
+			</tr>
+			{% for row in data['branch'] %}
+			<tr>
+				<td>{{ row['branch_name'] }}</td>
+				<td>{{row ['latitude']}}</td>
+				<td>{{ row['longitude']}}</td>
+				<td>{{row['phone']}}</td>
+				<td>{{row['email']}}</td>
+				<td><a href="?action=update&id={{ row['branch_id'] }}" class="btn btn-warning">UPDATE</a></td>
+				<td><a href="?action=delete&id={{ row['branch_id'] }}" class="btn btn-danger" >DELETE</a></td>
+			</tr>
+			{% endfor%}
+		</table>
+		{% else %}
+		<h2>NO TOUR TYPES ADDED IN OUR SYSTEM</h2>
+		{% endif %}
+		{% endif %}
+	</form>
+</center>
+
+   					   </div> <!-- end herolider -->
+                </div> <!-- end hero-text -->
+
+                
+              </div> <!-- end col-md-6 -->
+            </div> <!-- end row -->
+          </div> <!-- End container -->
+        </div> <!-- End hero-content -->
+      </div> <!-- End hero-section -->
+    </section>
+
+
+
+{% include 'footer.html' %}

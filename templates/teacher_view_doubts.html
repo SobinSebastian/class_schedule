@@ -1,0 +1,75 @@
+{% include 'teacherheader.html' %}
+  
+ <section>
+      <div id="hero-section" class="landing-hero" data-stellar-background-ratio="0">
+        <div class="hero-content">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8 col-sm-offset-2">
+
+                <div class="hero-text">
+                  <div class="herolider">
+     
+<center>
+<form method="post">
+{% if data['updater']%}
+<h1 align="center">UPDATE REPLY</h1>
+<table class="table" style="width: 400px">
+<tr>
+	<th>NAME OF USER</th>;
+	<td>{{ data['updater'][0]['first_name']}}</td>
+</tr>
+<tr>
+	<th>DOUBT</th>&emsp;
+	<td>{{ data['updater'][0]['doubt']}}</td>
+</tr>
+<tr>
+	<th>REPLY</th>
+	<td><input type="text" name="ans" value="{{ data['updater'][0]['answer']}}" class="form-control"></td>
+</tr>
+<tr>
+	<td colspan="2" align="center"><input type="submit" name="update" value="UPDATE" class="btn btn-info"></td>
+</tr>
+</table>
+{%else%}
+{%endif%}
+<br>
+<br>
+<h1 align="center">DOUBTS IN OUR SYSTEM</h1>
+<table class="table" style="width: 800px" border="1">
+	<tr>
+		<th>SL.NO</th>
+		<th>NAME OF STUDENT</th>
+		<th>DOUBT</th>
+		<th>ANSWER</th>
+		<th>UPDATE REPLY</th>
+	</tr>
+	{% for row in data['doubt'] %}
+	<tr>
+		<td>{{loop.index}}</td>
+		<td>{{row['first_name'] + row['last_name'] }} </td>
+		<td>{{row['doubt']}}</td>
+		<td>{{row['answer']}}</td>
+		
+		<td><a href="?action=update&id={{row['doubt_id']}}&shid={{data['shid']}}" class="btn btn-info">UPDATE ANSWER</a></td>
+	</tr>
+	{% endfor %}
+</table>
+
+</form>
+</center>
+
+   					   </div> <!-- end herolider -->
+                </div> <!-- end hero-text -->
+
+                
+              </div> <!-- end col-md-6 -->
+            </div> <!-- end row -->
+          </div> <!-- End container -->
+        </div> <!-- End hero-content -->
+      </div> <!-- End hero-section -->
+    </section>
+
+
+
+{% include 'footer.html' %}

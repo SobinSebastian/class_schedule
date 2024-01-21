@@ -1,0 +1,37 @@
+{%  include 'customerheader.html' %}
+
+
+
+<center>
+    <h1 style="margin-top: 3em">SEND COMPLAINT</h1>
+<form method='post'>
+<table class="table" style="width: 500px"> 
+
+		<tr>
+			<th>COMPLAINT</th>
+			<td><input type="text" name="complaint" class="form-control" required></td>
+		</tr>
+		<tr>
+		<td colspan='2' align="center"><input type="submit" name="submit" value="SEND" class="btn btn-primary"></td>
+		</tr>
+</table>
+
+{% if data['complaint']%}
+<div style="overflow-y: auto;height: 160px">
+<table class="table" style="width: 800px">
+	<tr>
+		<th>COMPLAINT</th>
+		<th>REPLY</th>
+		<th>DATE</th>
+	</tr>
+
+{% for row in data['complaint'] %}
+<tr>
+	<td>{{row['complaint']}}</td>
+	<td>{{row['reply']}}</td>
+	<td>{{row['datetime']}}</td>
+</tr>
+{% endfor %}
+</table>
+{% endif %}
+{% include 'footer.html' %}

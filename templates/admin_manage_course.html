@@ -1,0 +1,104 @@
+{% include 'adminheader.html' %}
+ <section>
+      <div id="hero-section" class="landing-hero" data-stellar-background-ratio="0">
+        <div class="hero-content">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8 col-sm-offset-2">
+
+                <div class="hero-text">
+                  <div class="herolider">
+
+<center>
+	<form method="post">
+		{% if data['updater'] %}
+		<h1>UPDATE COURSE</h1>
+	<table class="table" style="height: 200px">
+		<tr>
+			<th>COURSE</th>
+			<td><input type="text" name="c"  class="form-control"  value="{{data['updater'][0]['course_name']}}"></td>
+		</tr>
+		<tr>
+			<th>DURATION</th>
+			<td><input type="text" name="d"  class="form-control"  value="{{data['updater'][0]['duration']}}"></td>
+		</tr>
+		<tr>
+			<th>DESCRIPTION</th>
+			<td><input type="text" name="des" class="form-control"  value="{{data['updater'][0]['description']}}"></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center"><input type="submit" name="update" value="UPDATE" class="btn btn-primary"></td>
+		</tr>
+	</table>
+
+
+		{% else %}
+
+
+	
+		<h1>MANAGE COURSES ON DEPARTMENT -{{data['dept']}}</h1>
+
+		<table class="table" style="width:  700px;height: 200px">
+		<tr>
+			<th>COURSE</th>
+			<td><input type="text" name="c"  class="form-control"></td>
+		</tr>
+		<tr>
+			<th>DURATION</th>
+			<td><input type="text" name="d"  class="form-control"></td>
+		</tr>
+		<tr>
+			<th>DESCRIPTION</th>
+			<td><input type="text" name="des" class="form-control"></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center"><input type="submit" name="submit" value="ADD" class="btn btn-primary"></td>
+		</tr>
+
+
+		</table>
+
+
+		{% if data['courses'] %}
+		<h1>COURSES ADDED IN OUR SYSTEM -{{data['dept']}}</h1>
+		<table class="table" width="600px" border="1">
+			<tr>
+				<th>SL.NO</th>
+				<th>COURSE</th>
+				<th>DURATION</th>
+				<th>DESCRIPTION</th>
+				<th>UPDATE</th>
+				<TH>DELETE</TH>
+			</tr>
+			{% for row in data['courses'] %}
+			<tr>
+				<td>{{loop.index}}</td>
+				<td>{{row['course_name']}}</td>
+				<td>{{ row['duration'] }}</td>
+				<td>{{row['description']}}</td>
+				<td><a href="?action=update&id={{ row['course_id'] }}&did={{data['did']}}&dept={{data['dept']}}" class="btn btn-warning">UPDATE</a></td>
+				<td><a href="?action=delete&id={{ row['course_id'] }}&did={{data['did']}}&dept={{data['dept']}}" class="btn btn-danger" >DELETE</a></td>
+				<td>
+				<a href="admin_manage_subject?cid={{row['course_id']}}&cname={{row['course_name']}}" class="btn btn-info">MANAGE SUBJECT</a></td>
+			</tr>
+			{% endfor%}
+		</table>
+		{% else %}
+		<h2>NO COURSES ADDED IN {{data['dept']}}</h2>
+		{% endif %}
+		{% endif %}
+	</form>
+</center>
+   					   </div> <!-- end herolider -->
+                </div> <!-- end hero-text -->
+
+                
+              </div> <!-- end col-md-6 -->
+            </div> <!-- end row -->
+          </div> <!-- End container -->
+        </div> <!-- End hero-content -->
+      </div> <!-- End hero-section -->
+    </section>
+
+
+{% include 'footer.html' %}

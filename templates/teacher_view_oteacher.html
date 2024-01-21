@@ -1,0 +1,63 @@
+{% include 'teacherheader.html' %}
+ <section>
+      <div id="hero-section" class="landing-hero" data-stellar-background-ratio="0">
+        <div class="hero-content">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8 col-sm-offset-2">
+
+                <div class="hero-text">
+                  <div class="herolider">
+                  	
+
+
+<center>
+	<form method="post">
+		{% if data['oteacher'] %}
+<h1>VIEW OTHER TEACHERS AVILABILTY ON MY DEPARTMENT</h1>
+		<table class="table" width="900px" border="1">
+			<tr>
+				<th>SL.NO</th>
+				<th>TEASCHER</th>
+				<th>SUBJECT</th>
+				<th>DATE</th>
+				<th>FROM TIME</th>
+				<th>TO TIME</th>
+				<th>AVAILBILITY</th>
+				<th>SHEDULE STATUS</th>
+						
+			</tr>
+
+			{% for row in data['oteacher'] %}
+			<tr>
+				<td>{{loop.index}}</td>
+				<td>{{row['first_name']}} {{row['last_name']}}</td>
+				<td>{{ row['subject_name'] }}</td>
+				<td>{{ row['date'] }}</td>
+				<td>{{ row['starting_hour'] }}</td>
+				<td>{{ row['ending_hour'] }}</td>
+				<td>{{row['teacher_availability_status']}}</td>
+				<td>{{row['schedule_status']}}</td>
+			</tr>
+			{% endfor%}
+		</table>
+		{% else %}
+		<h1 style="color: white">NO TEACHERS</h1>
+	
+		{% endif %}
+	</form>
+
+		   					   </div> <!-- end herolider -->
+                </div> <!-- end hero-text -->
+
+                
+              </div> <!-- end col-md-6 -->
+            </div> <!-- end row -->
+          </div> <!-- End container -->
+        </div> <!-- End hero-content -->
+      </div> <!-- End hero-section -->
+    </section>
+
+
+			
+{% include 'footer.html' %}

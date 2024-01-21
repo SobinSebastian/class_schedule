@@ -1,0 +1,80 @@
+{% include 'adminheader.html' %}
+ <section>
+      <div id="hero-section" class="landing-hero" data-stellar-background-ratio="0">
+        <div class="hero-content">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8 col-sm-offset-2">
+
+                <div class="hero-text">
+                  <div class="herolider">
+
+<center>
+
+	{% if data['updater'] %}
+		 <h1>COVERD PORTIONS</h1>
+		 <table class="table" border="1" style="width: 600px">
+		 	<tr>
+		 		<th>SL.NO</th>
+		 		<th>PORTIONS</th>
+		 	</tr>
+		 	{% for row in data['updater'] %}
+		 	<tr>
+		 	<td>{{loop.index}}</td>
+		 	<td>{{row['portions']}}</td>
+		 	</tr>
+		 	{% endfor %}
+		 </table>
+		
+		 
+		{% elif data['shedule'] %}
+		<h1>TIME SCHEDULED ON COURSE {{data['cname']}}</h1>
+		<table class="table" style="width: 800px" border="1">
+			<tr>
+				<th>SL.NO</th>
+				<th>SUBJECT</th>
+				<th>DATE</th>
+				<th>FROM TIME</th>
+				<th>TO TIME</th>
+				<th>TEACHER</th>
+				<th>AVAILBILITY</th>
+				<th>SHEDULE STATUS</th>
+				
+			</tr>
+			{% for row in data['shedule'] %}
+			<tr>
+				<td>{{loop.index}}</td>
+				<td>{{ row['subject_name'] }}</td>
+				<td>{{ row['date'] }}</td>
+				<td>{{ row['starting_hour'] }}</td>
+				<td>{{ row['ending_hour'] }}</td>
+				<td>{{ row['first_name'] }}</td>
+				<td>{{row['teacher_availability_status']}}</td>
+				<td>{{row['schedule_status']}}</td>
+				
+				{% if row['schedule_status']=='conducted' %}
+				<td><a href="?action=cp&id={{ row['schedule_id'] }}&cid={{data['cid']}}&cname={{data['cname']}}" class="btn btn-primary">COVERED PORTIONS</a></td>
+				{% endif %}
+			</tr>
+			{% endfor%}
+		</table>
+		{% else %}
+		<h2>NO SHEDULES PLANNED</h2>
+		{% endif %}
+	
+	</form>
+</center>
+
+   					   </div> <!-- end herolider -->
+                </div> <!-- end hero-text -->
+
+                
+              </div> <!-- end col-md-6 -->
+            </div> <!-- end row -->
+          </div> <!-- End container -->
+        </div> <!-- End hero-content -->
+      </div> <!-- End hero-section -->
+    </section>
+
+
+{% include 'footer.html' %}

@@ -1,0 +1,105 @@
+{% include 'adminheader.html' %}
+ <section>
+      <div id="hero-section" class="landing-hero" data-stellar-background-ratio="0">
+        <div class="hero-content">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8 col-sm-offset-2">
+
+                <div class="hero-text">
+                  <div class="herolider">
+
+<center>
+	<form method="post">
+		{% if data['updater'] %}
+		<h1>UPDATE ACADAMIC CALENDER</h1>
+	<table class="table" style="height: 200px">
+	
+		<tr>
+			<th>DATE</th>
+			<td><input type="date" name="date"  class="form-control" value="{{data['updater'][0]['date']}}"></td>
+		</tr>
+		<tr>
+			<th>TITLE</th>
+			<td><input type="text" name="title"  class="form-control" value="{{data['updater'][0]['title']}}"> </td>
+		</tr>
+		<tr>
+			<th>DESCRIPTION</th>
+			<td><input type="text" name="des" class="form-control" value="{{data['updater'][0]['description']}}"></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center"><input type="submit" name="update" value="UPDATE" class="btn btn-primary"></td>
+		</tr>
+	</table>
+
+
+		{% else %}
+
+
+	
+		<h1>MANAGE ACADAMIC CALENDER</h1>
+
+		<table class="table" style="width:  700px;height: 200px">
+		<tr>
+			<th>DATE</th>
+			<td><input type="date" name="date"  class="form-control"></td>
+		</tr>
+		<tr>
+			<th>TITLE</th>
+			<td><input type="text" name="title"  class="form-control"></td>
+		</tr>
+		<tr>
+			<th>DESCRIPTION</th>
+			<td><input type="text" name="des" class="form-control"></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center"><input type="submit" name="submit" value="ADD" class="btn btn-info"></td>
+		</tr>
+
+
+		</table>
+
+
+		{% if data['calender'] %}
+		<h1>ACCADAMIC CALENDER</h1>
+		<table class="table" width="600px" border="1">
+			<tr>
+				<th>SL.NO</th>
+				<th>DATE</th>
+				<th>TITLE</th>
+				<th>DESCRIPTION</th>
+				<th>UPDATE</th>
+				<TH>DELETE</TH>
+			</tr>
+			{% for row in data['calender'] %}
+			<tr>
+				<td>{{loop.index}}</td>
+				<td>{{row['date']}}</td>
+				<td>{{row['title']}}</td>
+				<td>{{row['description']}}</td>
+				<td><a href="?action=update&id={{ row['calender_id'] }}" class="btn btn-warning">UPDATE</a></td>
+				<td><a href="?action=delete&id={{ row['calender_id'] }}" class="btn btn-danger" >DELETE</a></td>
+				<td>
+				
+			</tr>
+			{% endfor%}
+		</table>
+		{% else %}
+		<h2>NO PLANNER</h2>
+		{% endif %}
+		{% endif %}
+	</form>
+</center>
+   					   </div> <!-- end herolider -->
+                </div> <!-- end hero-text -->
+
+                
+              </div> <!-- end col-md-6 -->
+            </div> <!-- end row -->
+          </div> <!-- End container -->
+        </div> <!-- End hero-content -->
+      </div> <!-- End hero-section -->
+    </section>
+
+
+{% include 'footer.html' %}

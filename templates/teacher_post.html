@@ -1,0 +1,92 @@
+{% include 'teacherheader.html' %}
+ <section>
+      <div id="hero-section" class="landing-hero" data-stellar-background-ratio="0">
+        <div class="hero-content">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8 col-sm-offset-2">
+
+                <div class="hero-text">
+                  <div class="herolider">
+<center>
+	<form method="post" enctype="multipart/form-data">
+		{% if data['updater'] %}
+		<h1>UPDATE CLASS</h1>
+		
+		<table class="table" style="width:  700px">
+
+		<tr>
+			<th>CLASS</th>
+			<td><input type="text" name="clz"  class="form-control" value="{{data['updater'][0]['class']}}"></td>
+		</tr>
+		<tr>
+			<th>UPLOAD VIDEO</th>
+			<td><input type="file" name="vid"  class="form-control"></td>
+		</tr>
+		
+		<tr>
+			<td colspan="2" align="center"><input type="submit" name="update" value="UPDATE" class="btn btn-primary"></td>
+		</tr>
+	</table>
+
+
+		{% else %}
+
+
+	
+		<h1>UPLOAD NOTES</h1>
+
+		<table class="table" style="width:  700px;height: 100px">
+		
+		<tr>
+			<th>CHOOSE FILE</th>
+			<td><input type="file" name="file"  class="form-control"></td>
+		</tr>
+		
+		
+		<tr>
+			<td colspan="2" align="center"><input type="submit" name="submit" value="SUBMIT" class="btn btn-primary"></td>
+		</tr>
+
+
+		</table>
+
+
+		{% if data['notes'] %}
+		<h1>NOTES ADDED </h1>
+		<div style="overflow-y: auto;height: 700px">
+		<table class="table" width="600px" border="1">
+			<tr>
+				<th>SL.NO</th>
+				<th>NOTE</th>
+				<TH>DELETE</TH>
+			</tr>
+			{% for row in data['notes'] %}
+			<tr>
+				<td>{{loop.index}}</td>
+				<td><a href="/{{ row['note'] }}"><img src="/{{ row['note'] }}" height="100px" width="100px"></a></td>
+				
+				<!-- <td><a href="?action=update&id={{ row['class_id'] }}" class="btn btn-warning">UPDATE</a></td> -->
+				<td><a href="?action=delete&id={{ row['note_id'] }}&subject_id={{data['shid']}}" class="btn btn-danger" >DELETE</a></td>
+			</tr>
+			{% endfor%}
+		</table>
+		</div>
+		{% else %}
+		<h2>NO NOTES ADDED</h2>
+		{% endif %}
+		{% endif %}
+	</form>
+</center>
+		   					   </div> <!-- end herolider -->
+                </div> <!-- end hero-text -->
+
+                
+              </div> <!-- end col-md-6 -->
+            </div> <!-- end row -->
+          </div> <!-- End container -->
+        </div> <!-- End hero-content -->
+      </div> <!-- End hero-section -->
+    </section>
+
+{% include 'footer.html' %}

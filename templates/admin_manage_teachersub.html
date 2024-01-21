@@ -1,0 +1,135 @@
+{% include 'adminheader.html' %}
+ <section>
+      <div id="hero-section" class="landing-hero" data-stellar-background-ratio="0">
+        <div class="hero-content">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8 col-sm-offset-2">
+
+                <div class="hero-text">
+                  <div class="herolider">
+
+<center>
+	<form method="post">
+		{% if data['updater'] %}
+		<h1>UPDATE TRAINER DETAILS</h1>
+
+
+
+		<table class="table" style="width:  700px">
+		<tr>
+			<th>FIRST NAME</th>
+			<td><input type="text" name="fname"  class="form-control" value="{{data['updater'][0]['first_name']}}"></td>
+		</tr>
+		<tr>
+			<th>LAST NAME</th>
+			<td><input type="text" name="lname"  class="form-control" id="lat" value="{{data['updater'][0]['last_name']}}">
+			
+		</tr>
+		
+		<tr>
+			<th>PHONE</th>
+			<td><input type="text" name="phone"  class="form-control" value="{{data['updater'][0]['phone']}}"></td>
+		</tr>
+		<tr>
+			<th>EMAIL</th>
+			<td>
+			<input type="email" name="email"  class="form-control" value="{{data['updater'][0]['email']}}"></td>
+		</tr>
+		<tr>
+			<th>QUALIFICATION</th>
+			<td>
+			<input type="text" name="qua"  class="form-control" value="{{data['updater'][0]['qualification']}}"></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center"><input type="submit" name="update" value="UPDATE" class="btn btn-primary"></td>
+		</tr>
+	</table>
+
+
+
+
+		{% else %}
+
+		<h1>MANAGE TEACHER ON SUBJECT-{{data['subname']}}</h1>
+
+		<table class="table" style="width:  700px">
+		<tr>
+			<th>FIRST NAME</th>
+			<td><input type="text" name="fname"  class="form-control"></td>
+		</tr>
+		<tr>
+			<th>LAST NAME</th>
+			<td><input type="text" name="lname"  class="form-control" id="lat">
+			
+		</tr>
+		
+		<tr>
+			<th>PHONE</th>
+			<td><input type="text" name="phone"  class="form-control"></td>
+		</tr>
+		<tr>
+			<th>EMAIL</th>
+			<td>
+			<input type="email" name="email"  class="form-control"></td>
+		</tr>
+		<tr>
+			<th>QUALIFICATION</th>
+			<td>
+			<input type="text" name="qua"  class="form-control"></td>
+		</tr>
+		<tr>
+			<th>USERNAME</th>
+			<td><input type="text" name="uname" class="form-control"></td>
+		</tr>
+		<tr>
+			<th>PASSWORD</th>
+			<td><input type="text" name="password" class="form-control"></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center"><input type="submit" name="submit" value="ADD" class="btn btn-primary"></td>
+		</tr>
+	</table>
+
+
+
+		{% if data['teacher'] %}
+		<h1>TEACHER ON -{{data['subname']}}</h1>
+		<table class="table" width="600px" border="1">
+			<tr>
+				<th>TEACHER</th>
+				<th>PHONE</th>
+				<th>EMAIL</th>			
+				<th>QUALIFICATION</th>
+			</tr>
+			{% for row in data['teacher'] %}
+			<tr>
+				<td>{{ row['first_name'] }} {{ row['last_name'] }}</td>
+				<td>{{ row['phone']}}</td>
+				<td>{{row['email']}}</td>
+				<td>{{row['qualification']}}</td>
+				<td><a href="?action=update&id={{ row['teacher_id'] }}&dept={{data['dept']}}&subject_id={{data['subject_id']}}&subname={{data['subname']}}" class="btn btn-warning">UPDATE</a></td>
+				<td><a href="?action=delete&id={{ row['teacher_id'] }}&dept={{data['dept']}}&subject_id={{data['subject_id']}}&subname={{data['subname']}}" class="btn btn-danger" >DELETE</a></td>
+			</tr>
+			{% endfor%}
+		</table>
+		{% else %}
+		<h2>NO TEACHERS ON -{{data['subname']}}</h2>
+		{% endif %}
+		{% endif %}
+	</form>
+</center>
+
+   					   </div> <!-- end herolider -->
+                </div> <!-- end hero-text -->
+
+                
+              </div> <!-- end col-md-6 -->
+            </div> <!-- end row -->
+          </div> <!-- End container -->
+        </div> <!-- End hero-content -->
+      </div> <!-- End hero-section -->
+    </section>
+
+
+{% include 'footer.html' %}

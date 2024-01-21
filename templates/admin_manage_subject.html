@@ -1,0 +1,106 @@
+{% include 'adminheader.html' %}
+ <section>
+      <div id="hero-section" class="landing-hero" data-stellar-background-ratio="0">
+        <div class="hero-content">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8 col-sm-offset-2">
+
+                <div class="hero-text">
+                  <div class="herolider">
+
+<center>
+	<form method="post">
+		{% if data['updater'] %}
+		<h1>UPDATE SUBJECT</h1>
+	<table class="table" style="height: 200px">
+		<tr>
+			<th>SUBJECT</th>
+			<td><input type="text" name="s"  class="form-control"  value="{{data['updater'][0]['subject_name']}}"></td>
+		</tr>
+		
+		<tr>
+			<th>TOTAL HOURS</th>
+			<td><input type="text" name="th"  class="form-control" value="{{data['updater'][0]['subject_name']}}"></td>
+		</tr>
+		<tr>
+			<th>DESCRIPTION</th>
+			<td><input type="text" name="des" class="form-control" value="{{data['updater'][0]['subject_description']}}"></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center"><input type="submit" name="update" value="UPDATE" class="btn btn-primary"></td>
+		</tr>
+	</table>
+
+
+		{% else %}
+
+
+	
+		<h1>MANAGE SUBJECTS ON COURSE -{{data['cname']}}</h1>
+
+		<table class="table" style="width:  700px;height: 200px">
+		<tr>
+			<th>SUBJECT</th>
+			<td><input type="text" name="s"  class="form-control"></td>
+		</tr>
+		<tr>
+			<th>TOTAL HOURS</th>
+			<td><input type="text" name="th"  class="form-control"></td>
+		</tr>
+		<tr>
+			<th>DESCRIPTION</th>
+			<td><input type="text" name="des" class="form-control"></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center"><input type="submit" name="submit" value="ADD" class="btn btn-primary"></td>
+		</tr>
+
+
+		</table>
+
+
+		{% if data['subjects'] %}
+		<h1>SUBJECTS ADDED IN COURSE -{{data['cname']}}</h1>
+		<table class="table" width="600px" border="1">
+			<tr>
+				<th>SL.NO</th>
+				<th>SUBJECT</th>
+				<th>TOTAL HOURS</th>
+				<th>DESCRIPTION</th>
+				<th>UPDATE</th>
+				<TH>DELETE</TH>
+			</tr>
+			{% for row in data['subjects'] %}
+			<tr>
+				<td>{{loop.index}}</td>
+				<td>{{row['subject_name']}}</td>
+				<td>{{ row['total_hours'] }}</td>
+				<td>{{row['subject_description']}}</td>
+				<td><a href="?action=update&id={{ row['subject_id'] }}&cid={{data['cid']}}&cname={{data['cname']}}" class="btn btn-warning">UPDATE</a></td>
+				<td><a href="?action=delete&id={{ row['subject_id'] }}&cid={{data['cid']}}&cname={{data['cname']}}" class="btn btn-danger" >DELETE</a></td>
+				<td>
+				
+			</tr>
+			{% endfor%}
+		</table>
+		{% else %}
+		<h2>NO SUBJECTS ADDED IN {{data['cname']}}</h2>
+		{% endif %}
+		{% endif %}
+	</form>
+</center>
+
+   					   </div> <!-- end herolider -->
+                </div> <!-- end hero-text -->
+
+                
+              </div> <!-- end col-md-6 -->
+            </div> <!-- end row -->
+          </div> <!-- End container -->
+        </div> <!-- End hero-content -->
+      </div> <!-- End hero-section -->
+    </section>
+
+
+{% include 'footer.html' %}

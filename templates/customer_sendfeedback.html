@@ -1,0 +1,52 @@
+{%  include 'customerheader.html' %}
+
+
+
+<center>
+    <h1 style="margin-top: 3em">SEND FEEDBACK</h1>
+<form method='post'>
+<table class="table" style="width: 500px"> 
+		<tr>
+			<th>BRANCH</th>
+			
+			<td>
+				<select name="bid">
+					{% for row in data['branch'] %}
+					
+					<option value="{{row['branch_id']}}">{{row['branch_name']}}</option>
+				
+					{% endfor %}
+				</select>
+			</td>
+	
+		</tr>
+		<tr>
+			<th>FEEDBACK</th>
+			<td><input type="text" name="fb" class="form-control" required></td>
+		</tr>
+		<tr>
+		<td colspan='2' align="center"><input type="submit" name="submit" value="ADD" class="btn btn-primary"></td>
+		</tr>
+</table>
+
+{% if data['fb']%}
+<div style="overflow-y: auto;height: 160px">
+<table class="table" style="width: 800px">
+	<tr>
+		<th>BRANCH</th>
+		<th>FEEDBACK</th>
+		<th>REPLY</th>
+		<th>DATE</th>
+	</tr>
+
+{% for row in data['fb'] %}
+<tr>
+	<td>{{row['branch_name']}}</td>
+	<td>{{row['feedback_description']}}</td>
+	<td>{{row['reply']}}</td>
+	<td>{{row['feedback_date']}}</td>
+</tr>
+{% endfor %}
+</table>
+{% endif %}
+{% include 'footer.html' %}

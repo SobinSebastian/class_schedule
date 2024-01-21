@@ -1,0 +1,104 @@
+{% include 'teacherheader.html' %}
+ <section>
+      <div id="hero-section" class="landing-hero" data-stellar-background-ratio="0">
+        <div class="hero-content">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8 col-sm-offset-2">
+
+                <div class="hero-text">
+                  <div class="herolider">
+                  	
+<form method="post">
+<center>
+	 {% if data['upload'] %}
+	 <h1>PORTIONS COVERED</h1>
+
+	 <table class="table" style="width: 700px">
+	 	<tr>
+	 		<th>PORTION</th>
+	 		<td><textarea name="portion" class="form-control"></textarea></td>		
+	 	</tr>
+	 	<tr>
+	 		<td colspan="2" align="center"><input type="submit" name="submit" value="SUBMIT" class="btn btn-primary"></td>
+	 	</tr>
+	 </table>
+		 {% if data['updater'] %}
+		 <h1>COVERD PORTIONS</h1>
+		 <table class="table" border="1" style="width: 600px">
+		 	<tr>
+		 		<th>SL.NO</th>
+		 		<th>PORTIONS</th>
+		 	</tr>
+		 	{% for row in data['updater'] %}
+		 	<tr>
+		 	<td>{{loop.index}}</td>
+		 	<td>{{row['portions']}}</td>
+		 	</tr>
+		 	{% endfor %}
+		 </table>
+		 {% endif %}
+		 
+
+	
+
+	{% elif data['shedule'] %}
+		<h1>TIME SCHEDULED </h1>
+		<table class="table" width="1250px" style="margin-left: -18em" border="1">
+			<tr>
+				<th>SL.NO</th>
+				<th>SUBJECT</th>
+				<th>DATE</th>
+				<th>FROM TIME</th>
+				<th>TO TIME</th>
+				<th>AVAILBILITY</th>
+				<th>SHEDULE STATUS</th>
+				
+				
+			</tr>
+
+			{% for row in data['shedule'] %}
+			<tr>
+				<td>{{loop.index}}</td>
+				<td>{{ row['subject_name'] }}</td>
+				<td>{{ row['date'] }}</td>
+				<td>{{ row['starting_hour'] }}</td>
+				<td>{{ row['ending_hour'] }}</td>
+				<td>{{row['teacher_availability_status']}}</td>
+				<td>{{row['schedule_status']}}</td>
+				<td><a href="teacher_view_students" class="btn btn-info">VIEW STUDENTS</a></td>
+				{% if row['teacher_availability_status']=='pending' %}
+				<td><a href="?action=a&id={{ row['schedule_id'] }}" class="btn btn-danger">AVAIALABLE</a></td>
+				<td><a href="?action=na&id={{ row['schedule_id'] }}" class="btn btn-danger" >NOT AVAIALABLE</a></td>
+				{% endif %}
+				{% if row['teacher_availability_status']=='available' and row['schedule_status']=='pending' %}
+				<td><a href="?action=c&id={{ row['schedule_id'] }}" class="btn btn-danger">CONDUCTED</a></td>
+				{% endif %}
+				{% if row['schedule_status']=='conducted' %}
+				<td><a href="?action=cp&id={{ row['schedule_id'] }}" class="btn btn-primary">COVERED PORTIONS</a></td>
+				<td><a href="teacher_post?subject_id={{ row['subject_id'] }}" class="btn btn-info">POST NOTES</a></td>
+				<td><a href="teacher_view_doubts?shid={{ row['schedule_id'] }}" class="btn btn-success">VIEW DOUBTS</a></td>
+				{% endif %}
+			</tr>
+			{% endfor%}
+		</table>
+		{% else %}
+		<h2>NO SHEDULES PLANNED</h2>
+		{% endif %}
+</center>
+
+</form>
+		   					   </div> <!-- end herolider -->
+                </div> <!-- end hero-text -->
+
+                
+              </div> <!-- end col-md-6 -->
+            </div> <!-- end row -->
+          </div> <!-- End container -->
+        </div> <!-- End hero-content -->
+      </div> <!-- End hero-section -->
+    </section>
+
+
+			
+{% include 'footer.html' %}

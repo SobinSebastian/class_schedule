@@ -1,0 +1,62 @@
+{% include 'teacherheader.html' %}
+ <section>
+      <div id="hero-section" class="landing-hero" data-stellar-background-ratio="0">
+        <div class="hero-content">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8 col-sm-offset-2">
+
+                <div class="hero-text">
+                  <div class="herolider">
+                  	
+<form method="post">
+<center>
+	
+	
+
+	{% if data['students'] %}
+		<h1>STUDENTS COURSE -{{data['course_name']}}</h1>
+		<table class="table" width="1200px" style="margin-left: -10em" border="1" >
+			<tr>
+				<th>SL.NO</th>
+				<th>STUDENT</th>
+				<th>HOUSE NAME</th>
+				<TH>PLACE</TH>
+				<th>PHONE</th>
+				<th>EMAIL</th>
+				
+			</tr>
+
+			{% for row in data['students'] %}
+			<tr>
+				<td>{{loop.index}}</td>
+				<td>{{ row['first_name'] }}</td>
+				<td>{{ row['house_name'] }}</td>
+				<td>{{row['place']}}</td>
+				<td>{{ row['phone'] }}</td>
+				<td>{{ row['email'] }}</td>
+				
+	
+			</tr>
+			{% endfor%}
+		</table>
+		{% else %}
+		<h2>NO STUDENTS ON COURSE -{{data['course_name']}}</h2>
+		{% endif %}
+</center>
+
+</form>
+		   					   </div> <!-- end herolider -->
+                </div> <!-- end hero-text -->
+
+                
+              </div> <!-- end col-md-6 -->
+            </div> <!-- end row -->
+          </div> <!-- End container -->
+        </div> <!-- End hero-content -->
+      </div> <!-- End hero-section -->
+    </section>
+
+
+			
+{% include 'footer.html' %}

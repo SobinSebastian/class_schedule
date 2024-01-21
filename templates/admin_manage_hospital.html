@@ -1,0 +1,109 @@
+{% include 'adminheader.html' %}
+<center>
+	<form method="post">
+		{% if data['updater'] %}
+		<h1>UPDATE HOSPITAL</h1>
+
+
+
+		<table class="table" style="width:  700px">
+		<tr>
+			<th>HOSPITAL NAME</th>
+			<td><input type="text" name="hname"  class="form-control" value="{{data['updater'][0]['hospital']}}"></td>
+		</tr>
+		<tr>
+			<th>PLACE</th>
+			<td><input type="text" name="place"  class="form-control" id="lat"  value="{{data['updater'][0]['place']}}" >
+
+		</tr>
+
+		<tr>
+			<th>PHONE</th>
+			<td><input type="text" name="phone"  class="form-control" value="{{data['updater'][0]['phone']}}"></td>
+		</tr>
+		<tr>
+			<th>EMAIL</th>
+			<td>
+			<input type="email" name="email"  class="form-control" value="{{data['updater'][0]['email']}}"></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center"><input type="submit" name="update" value="UPDATE" class="btn btn-primary"></td>
+		</tr>
+	</table>
+
+
+
+
+		{% else %}
+
+	
+
+		<h1>MANAGE HOSPITALS</h1>
+
+		<table class="table" style="width:  700px">
+		<tr>
+			<th>HOSPITAL NAME</th>
+			<td><input type="text" name="hname"  class="form-control"></td>
+		</tr>
+		<tr>
+			<th>PLACE</th>
+			<td><input type="text" name="place"  class="form-control" id="lat">
+			
+		</tr>
+		
+		<tr>
+			<th>PHONE</th>
+			<td><input type="text" name="phone"  class="form-control"></td>
+		</tr>
+		<tr>
+			<th>EMAIL</th>
+			<td>
+			<input type="email" name="email"  class="form-control"></td>
+		</tr>
+		
+
+		<tr>
+			<th>USER NAME</th>
+			<td><input type="text" name="uname"  minlength="5" placeholder="User Name Must Be Atleast 5 Charecter " class="form-control" ></td>
+		</tr>
+		<tr>
+			<th>PASSWORD</th>
+			<td><input type="password" name="password"  minlength="8" placeholder="Password Must Be Atleast 8 Charecter" class="form-control"></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center"><input type="submit" name="submit" value="register" class="btn btn-primary"></td>
+		</tr>
+	</table>
+
+
+
+		{% if data['hospital'] %}
+		<h1>BRANCHES ADDED IN OUR SYSTEM</h1>
+		<table class="table" width="600px">
+			<tr>
+				<th>HOSPITAL NAME</th>
+				<th>PLACE</th>
+				<th>LONGITUDE</th>
+				<th>PHONE</th>
+				<th>EMAIL</th>
+			</tr>
+			{% for row in data['hospital'] %}
+			<tr>
+				<td>{{ row['hospital'] }}</td>
+				<td>{{row ['place']}}</td>
+				<td>{{ row['longitude']}}</td>
+				<td>{{row['phone']}}</td>
+				<td>{{row['email']}}</td>
+				<td><a href="?action=update&id={{ row['hospital_id'] }}" class="btn btn-warning">UPDATE</a></td>
+				<td><a href="?action=delete&id={{ row['hospital_id'] }}" class="btn btn-danger" >DELETE</a></td>
+			</tr>
+			{% endfor%}
+		</table>
+		{% else %}
+		<h2>NO TOUR TYPES ADDED IN OUR SYSTEM</h2>
+		{% endif %}
+		{% endif %}
+	</form>
+</center>
+
+{% include 'footer.html' %}

@@ -1,0 +1,63 @@
+{% include 'adminheader.html' %}
+ <section>
+      <div id="hero-section" class="landing-hero" data-stellar-background-ratio="0">
+        <div class="hero-content">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8 col-sm-offset-2">
+
+                <div class="hero-text">
+                  <div class="herolider">
+
+<center>
+	<form method="post">
+		<h1>VIEW USERS</h1>
+		<table>
+			<tr>
+				<th>FIRST NAME</th>
+				<th>LAST NAME</th>
+				<th>HOUSE NAME</th>
+				<th>PLACE</th>
+				<th>DISTRICT</th>
+				<th>COUNTRY</th>
+				<th>PINCODE</th>
+				<th>PHONE</th>
+				<th>EMAIL</th>
+				<th>PASSPORT.NO</th>
+				<th>GENDER</th>
+				<th>DATE OF BIRTH</th>
+			</tr>
+			{% for row in data['users'] %}
+			<tr>
+				<td>{{row['first_name']}}</td>
+				<td>{{row['last_name']}}</td>
+				<td>{{row['house_name']}}</td>
+				<td>{{row['place']}}</td>
+				<td>{{row['district']}}</td>
+				<td>{{row['country']}}</td>
+				<td>{{row['pincode']}}</td>
+				<td>{{row['phone']}}</td>
+				<td>{{row['email']}}</td>
+				<td>{{row['passport_no']}}</td>
+				<td>{{row['gender']}}</td>
+				<td>{{row['dob']}}</td>
+			</tr>
+			{% endfor %}
+		</table>
+
+	</form>
+</center>
+   					   </div> <!-- end herolider -->
+                </div> <!-- end hero-text -->
+
+                
+              </div> <!-- end col-md-6 -->
+            </div> <!-- end row -->
+          </div> <!-- End container -->
+        </div> <!-- End hero-content -->
+      </div> <!-- End hero-section -->
+    </section>
+
+
+
+{% include 'footer.html' %}
