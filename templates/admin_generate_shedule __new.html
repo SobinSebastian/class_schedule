@@ -1,0 +1,54 @@
+{% include 'adminheader.html' %}
+ <section>
+      <div id="hero-section" class="landing-hero" data-stellar-background-ratio="0">
+        <div class="hero-content">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8 col-sm-offset-2">
+
+                <div class="hero-text">
+                  <div class="herolider">
+
+<center>
+	<form method="post">
+		
+
+		{% if data['details'] %}
+		<h1>GENERATE TIME TABLE</h1>
+		<table class="table" width="750px">
+			<tr>
+				<th>SL.NO</th>
+				<th>DEPARTMENT</th>
+				<th>COURSE</th>	
+						
+			</tr>
+			{% for row in data['details'] %}
+			<tr>
+				<td>{{loop.index}}</td>
+				<td>{{row['department_name']}}</td>
+				<td>{{ row['course_name'] }}</td>
+				<td><a href="admin_generate_shedulesub?cid={{ row['course_id'] }}&cname={{row['course_name']}}" class="btn btn-warning">MANAGE TIME TABLE</a></td>
+				<td><a href="admin_view_shedule?cid={{ row['course_id'] }}&cname={{row['course_name']}}" class="btn btn-warning">VIEW CLASS UPDATES</a></td>
+				
+			</tr>
+			{% endfor%}
+		</table>
+		{% else %}
+		<h2>NO COURSES</h2>
+		{% endif %}
+	
+	</form>
+</center>
+   					   </div> <!-- end herolider -->
+                </div> <!-- end hero-text -->
+
+                
+              </div> <!-- end col-md-6 -->
+            </div> <!-- end row -->
+          </div> <!-- End container -->
+        </div> <!-- End hero-content -->
+      </div> <!-- End hero-section -->
+    </section>
+
+
+{% include 'footer.html' %}
